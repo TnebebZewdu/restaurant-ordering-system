@@ -1,0 +1,46 @@
+/* =========================================
+   GLOBAL STYLES
+   ========================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+
+/* =========================================
+   HOME PAGE ANIMATIONS
+   ========================================= */
+
+/* Left → Right Shine */
+.shine-animation {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -33.333%;
+  width: 33.333%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.12),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shimmer 5s linear infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(0) skewX(-20deg);
+  }
+
+  100% {
+    transform: translateX(400%) skewX(-20deg);
+  }
+}
