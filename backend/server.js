@@ -84,13 +84,7 @@ const db = mysql.createPool({
 // Customer does NOT need authentication.
 //
 // Admin and Kitchen require a token.
-//
-// Admin:
-// PIN 1234 -> admin-token
-//
-// Kitchen:
-// PIN 5555 -> kitchen-token
-//
+
 // ==================================================
 
 const staffTokens = {
@@ -195,31 +189,17 @@ app.post('/api/login', (req, res) => {
   // ADMIN LOGIN
   // -----------------------------
 
-  if (
-    role === 'admin' &&
-    pin === '1234'
-  ) {
-    return res.json({
-      success: true,
-      token: 'admin-token',
-      role: 'admin'
-    });
-  }
+  if (role === 'admin' && pin === process.env.ADMIN_PIN) {
+  return res.json({ success: true, token: 'admin-token', role: 'admin' });
+}
 
   // -----------------------------
   // KITCHEN LOGIN
   // -----------------------------
 
-  if (
-    role === 'kitchen' &&
-    pin === '5555'
-  ) {
-    return res.json({
-      success: true,
-      token: 'kitchen-token',
-      role: 'kitchen'
-    });
-  }
+ if (role === 'kitchen' && pin === process.env.KITCHEN_PIN) {
+  return res.json({ success: true, token: 'kitchen-token', role: 'kitchen' });
+}
 
   return res.status(401).json({
     error: 'Invalid PIN'
